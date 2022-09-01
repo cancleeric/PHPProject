@@ -292,6 +292,11 @@ class CI_Output {
 
 	// --------------------------------------------------------------------
 
+        
+        public function get_header_function($headers)
+        {
+			return array_shift($headers);
+        }
 	/**
 	 * Get Header
 	 *
@@ -301,10 +306,7 @@ class CI_Output {
 	public function get_header($header)
 	{
 		// We only need [x][0] from our multi-dimensional array
-		$header_lines = array_map(function ($headers)
-		{
-			return array_shift($headers);
-		}, $this->headers);
+		$header_lines = array_map($this->get_header_function($header), $this->headers);
 
 		$headers = array_merge(
 			$header_lines,
