@@ -1,0 +1,28 @@
+<?php
+
+/* 
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHP.php to edit this template
+ */
+
+class Pages extends CI_Controller {
+
+
+        public function view($page = 'home')
+        {
+            if ( ! file_exists(APPPATH.'views/pages/'.$page.'.php'))
+            {
+            // Whoops, we don't have a page for that!
+               show_404();
+            }
+
+            $data['title'] = ucfirst($page); // Capitalize the first letter
+
+            $this->load->view('templates/header', $data);
+            $this->load->view('pages/'.$page, $data);
+            $this->load->view('templates/footer', $data);
+            
+        }
+}
+
+?>
